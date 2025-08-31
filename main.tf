@@ -15,3 +15,10 @@ resource "github_repository_deploy_key" "this" {
   key        = var.public_key_openssh
   read_only  = false
 }
+
+# Make "main" the default branch (and rename if current default is "master")
+resource "github_branch_default" "this" {
+  repository = github_repository.this.name
+  branch     = "main"
+  rename     = true
+}
